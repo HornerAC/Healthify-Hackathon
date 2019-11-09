@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
+		<meta content="IE=edge" http-equiv="X-UA-Compatible">
+		<meta content="#1a1a1a" name="theme-color">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-16">
+
+		<!-- Enable PWA ability on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Healthify">
+
+		<title>Healthify</title>
+
+		<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+		<link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.css" type="text/css" media="all" />
+
+	</head>
+	<body>
+
+		<section id="view_main" class="view">
+
+		</section>
+
+		<section id="view_steps" class="view active">
+
+		</section>
+
+		<section id="view_login" class="view active">
+			<div class="jumbotron jumbotron-fluid" id="login_section">
+				<div class="container">
+					<h1 class="display-4">Healthify</h1>
+					<p class="lead">Stay Healthy. Or Else.</p>
+					<div class="alert alert-primary" role="alert" id="login_alert">
+						You must login before using this application
+					</div>
+					<form id="login_form" method="post">
+						<div class="form-group">
+							<label for="login_email">Email address</label>
+							<input type="email" class="form-control" name="email" id="login_email" aria-describedby="accHelp" placeholder="Enter email" />
+							<small id="accHelp" class="form-text text-muted">If you don't have an account, one will be created automatically.</small>
+						</div>
+						<div class="form-group">
+							<label for="login_password">Password</label>
+							<input type="password" class="form-control" name="password" id="login_password" placeholder="Password" />
+						</div>
+						<button type="submit" class="btn btn-dark">Login / Create Account</button>
+						<button type="submit" class="btn btn-dark">Login with Facebook</button>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<script type="text/javascript" src="steps.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+
+	</body>
+</html>
