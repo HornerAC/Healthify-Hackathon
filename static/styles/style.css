@@ -5,3 +5,7 @@
 .active{
 	display:block;
 }
+
+body{
+	background: pink;
+}
