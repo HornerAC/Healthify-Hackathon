@@ -31,12 +31,42 @@
 	</head>
 	<body>
 
-		<section id="view_main" class="view active">
+		<section id="view_main" class="view">
 			<div class="jumbotron jumbotron-fluid" id="main_section">
 				<div class="container">
 					<h1 class="display-4">Healthify</h1>
 					<button type="submit" class="btn btn-dark" id="step_recorder">Step Recording</button>
-					<button type="submit" class="btn btn-dark" id="step_goal">Step Goal</button>
+					<button type="submit" class="btn btn-dark" id="maps">Plan Map Route</button>
+					<button type="submit" class="btn btn-dark" id="step_goal">Step Goal</button><br /><br />
+					<div class="alert alert-info" role="alert" id="hist_view">
+						Click to view your route history
+					</div>
+					<button type="submit" class="btn btn-dark" id="logout">Logout</button>
+				</div>
+			</div>
+		</section>
+
+		<section id="view_upg" class="view">
+			<div class="jumbotron jumbotron-fluid" id="upg_section">
+				<div class="container">
+					<h1 class="display-4">Healthify</h1>
+					<h2>Upgrade to use this feature.</h2>
+
+					<button type="submit" class="btn btn-dark" id="up">Complete.</button><br /><br />
+				</div>
+			</div>
+		</section>
+
+		<section id="view_better" class="view">
+			<div class="jumbotron jumbotron-fluid" id="better_section">
+				<div class="container">
+					<h1 class="display-4">Healthify</h1>
+					<div class="alert alert-warning" role="alert" id="better_alert">
+						Please collect more data first.
+					</div>
+					<div class="alert alert-info" role="alert" id="step_view">
+						Click here to go back...
+					</div>
 				</div>
 			</div>
 		</section>
@@ -47,6 +77,9 @@
 					<h1 class="display-4">Healthify</h1>
 					<div class="alert alert-danger" role="alert" id="step_alert">
 						Click to stop recording steps.
+					</div>
+					<div class="alert alert-light" style="display:none" role="alert" id="step_better">
+						Click to view insights about how you move.
 					</div>
 					<table id="recorder">
 						<tbody>
@@ -103,13 +136,13 @@
 			</div>
 		</section>
 
-		<section id="view_login" class="view">
+		<section id="view_login" class="view active">
 			<div class="jumbotron jumbotron-fluid" id="login_section">
 				<div class="container">
 					<h1 class="display-4">Healthify</h1>
 					<p class="lead">Stay Healthy. Or Else.</p>
 					<div class="alert alert-primary" role="alert" id="login_alert">
-						You must login before using this application
+						To access healthify premium, please login.
 					</div>
 					<form id="login_form" method="post">
 						<div class="form-group">

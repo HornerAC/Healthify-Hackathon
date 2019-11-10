@@ -18,6 +18,22 @@ var steps = {
 		steps.permission();
 		app.update_permission();
 		steps.record();
+
+		setTimeout(function() {
+			$("#step_better").fadeIn(500).on("click enter", steps.view_better)
+		},15000);
+		$("#step_view").on("click enter", steps.view_better);
+	},
+
+	view_better:function(){
+		if ($("#view_better").is(":visible")){
+			$("#view_better").removeClass("active");
+			$("#view_steps").addClass("active");
+		} else {
+			$("#view_better").addClass("active");
+			$("#view_steps").removeClass("active");
+			$("#step_better").hide();
+		}
 	},
 
 	create:function(){
@@ -82,11 +98,11 @@ var steps = {
 			steps.counter["idle"] = steps.counter["idle"] + 1;
 		} else if (total_diff > 3 && total_diff < 7){
 			steps.counter["walk"] = steps.counter["walk"] + 1;
-		} else if (total_diff > 7 && total_diff < 11){
+		} else if (total_diff > 7 && total_diff < 12){
 			steps.counter["jog"] = steps.counter["jog"] + 1;
-		} else if (total_diff > 11 && total_diff < 20){
+		} else if (total_diff > 12 && total_diff < 21){
 			steps.counter["run"] = steps.counter["run"] + 1;
-		} else if (total_diff > 20){
+		} else if (total_diff > 21){
 			steps.counter["sprint"] = steps.counter["sprint"] + 1;
 		}
 
@@ -97,9 +113,9 @@ var steps = {
 
 	updategraph:function(){
 		if (c.currchart === "pie"){
-			c.drawProportionChart(Object.values(steps.counter))
+			c.drawProportionChart(Object.values(steps.counter));
 		} else if (c.currchart === "speed") {
-
+			c.drawSpeedChart();
 		}
 	},
 

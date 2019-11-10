@@ -1,22 +1,93 @@
 var app = {
 
+	currgoal:5000,
+
 	init:function(){
-		steps.init();
-		$("#step_recorder").on("click enter",app.view);
-		$("#step_alert").on("click enter",steps.toggle);
-		c.init();
+		if (Storage !== undefined && localStorage["loggedIn"] && localStorage["loggedIn"] === "true"){
+
+			if (localStorage["goal"]) app.currgoal = localStorage["goal"];
+
+			steps.init();
+			app.viewhome();
+			$("#step_recorder").on("click enter",app.view);
+			$("#step_alert").on("click enter",steps.toggle);
+			$("#step_goal").on("click enter",app.goalpage);
+			$("#hist_view").on("click enter",app.hist_view);
+
+			$("#geo").on("click enter",function(){
+				window.location.href = "geo:51.4846662,-3.1700558?z=17"
+			});
+
+			c.init();
+			$("#logout").on("click enter",app.logout);
+		} else {
+			app.assignloginevt();
+		}
 	},
 
 	view:function(){
 		$("#view_steps").addClass("active");
 		$("#view_main").removeClass("active");
+
+		$("h1.display-4").on("click enter",function () {
+			$(".active").removeClass("active");
+			$("#view_main").addClass("active");
+		});
+
 		v.init();
+	},
+
+	sw:function(){
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('sw.js').then(function(registration){
+				console.log('ServiceWorker registration successful with scope: ',registration.scope);
+			},function(err){
+				console.log('ServiceWorker registration failed: ',err);
+			});
+		}
 	},
 
 	update_permission:function(){
 		if (!steps.allowed){
 			alert("No accelerometer permission");
 		}
+	},
+
+	viewhome:function(){
+		$("#view_login").removeClass("active");
+		$("#view_main").addClass("active");
+	},
+
+	goalpage:function(){
+		var newgoal = prompt("Enter a new step goal", app.currgoal);
+
+		if (newgoal){
+			app.currgoal = newgoal;
+			localStorage["goal"] = newgoal;
+			alert("Step goal is now: " + newgoal);
+		} else {
+			alert("Step goal has not changed.");
+		}
+	},
+
+	hist_view:function(){
+		$("html").css("opacity","0.3");
+		setTimeout(function () {
+			alert("History view currently doesn't have any data to show you.");
+			$("html").css("opacity","1");
+		},500)
+	},
+
+	assignloginevt:function() {
+		$("#login_form").on("submit",function(evt){
+			localStorage["loggedIn"] = true;
+			window.location.reload();
+		});
+	},
+
+	logout:function(){
+		localStorage["loggedIn"] = false;
+		window.location.reload();
 	}
 };
 
@@ -73,11 +144,12 @@ var c = {
 	curr:null,
 
 	init:function(){
-		c.drawSpeedChart();
+		c.curr = new Chart(c.ctx, c.data);
 	},
 
 	drawSpeedChart:function(){
-		c.curr = new Chart(c.ctx, c.data);
+		c.data.type = "line";
+		c.curr.update(0);
 	},
 
 	drawProportionChart:function(data_set){
@@ -214,5 +286,15 @@ var v = {
 	}
 };
 
+// Fallback for jQuery
+if (!window.jQuery){
+	var j = document.createElement("script");
+	j.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
+	j.type = "text/javascript";
+	document.head.append(j);
+}
+
+// PWA
+app.sw();
 
 window.onload = app.init;

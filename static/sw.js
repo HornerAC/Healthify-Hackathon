@@ -1,6 +1,6 @@
 "use strict";
 
-var version = 'v1:';
+var version = 'v2:';
 var base = '/health-app/';
 var appName = "healthyapp";
 var appAssets = [
@@ -15,7 +15,7 @@ var appAssets = [
 	base + "libraries/pouchdb/pouchdb.min.js",
 	base + "libraries/chartjs/Chart.min.js",
 	base + "libraries/chartjs/Chart.min.css",
-	base + "libraries/bootstrap/bootstrap.css",
+	base + "libraries/bootstrap/css/bootstrap.css",
 ];
 
 self.addEventListener("install", function (event) {

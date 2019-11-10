@@ -5,7 +5,17 @@
 .active{
 	display:block;
 }
+html {
+	transition:opacity 0.5s ease-in-out;
+}
 
+h1{
+	transition:font-weight .2s ease-in-out;
+}
+h1:hover{
+	cursor:pointer;
+	font-weight:600;
+}
 
 #step_graph{
 	max-height:40vh;
