@@ -1,0 +1,32 @@
+.view{
+	display:none;
+}
+
+.active{
+	display:block;
+}
+
+
+#step_graph{
+	max-height:40vh;
+}
+
+#step_map{
+	min-height:50vh;
+	z-index:10;
+	transition:.2s opacity ease-in-out;
+}
+
+table {
+	width:100%;
+}
+
+tbody tr td {
+	width:50%;
+	font-size:1.1em;
+	text-align: center;
+}
+
+tbody tr {
+	border-bottom:0.1em solid #000;
+}

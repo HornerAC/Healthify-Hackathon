@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport" />
+		<meta content="IE=edge" http-equiv="X-UA-Compatible">
+		<meta content="#1a1a1a" name="theme-color">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-16">
+
+		<!-- Enable PWA ability on iOS -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta name="apple-mobile-web-app-title" content="Healthify">
+
+		<title>Healthify</title>
+
+		<link rel="manifest" href="manifest.json">
+		<link rel="icon" href="img/health-512.png" type="image/x-icon" sizes="512x512" />
+		<link rel="apple-touch-icon" href="img/health-512.png" sizes="512x512" />
+
+		<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+		<link rel="stylesheet" href="libraries/bootstrap/css/bootstrap.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="libraries/chartjs/Chart.min.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+		<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+		<script src="libraries/moment/moment.min.js"></script>
+		<script src="libraries/chartjs/Chart.min.js"></script>
+
+	</head>
+	<body>
+
+		<section id="view_main" class="view active">
+			<div class="jumbotron jumbotron-fluid" id="main_section">
+				<div class="container">
+					<h1 class="display-4">Healthify</h1>
+					<button type="submit" class="btn btn-dark" id="step_recorder">Step Recording</button>
+					<button type="submit" class="btn btn-dark" id="step_goal">Step Goal</button>
+				</div>
+			</div>
+		</section>
+
+		<section id="view_steps" class="view">
+			<div class="jumbotron jumbotron-fluid" id="step_section">
+				<div class="container">
+					<h1 class="display-4">Healthify</h1>
+					<div class="alert alert-danger" role="alert" id="step_alert">
+						Click to stop recording steps.
+					</div>
+					<table id="recorder">
+						<tbody>
+							<tr>
+								<td>Step Sensitivity</td>
+								<td>
+									<select id="stepSensitive" onChange='steps.changeSensitivity(stepSensitive)'>
+										<option value='3'>Weak</option>
+										<option value='4'>Standard</option>
+										<option value='5' selected>Moderate</option>
+										<option value='6'>Increased</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Time Elapsed</td>
+								<td id="step_timer"></td>
+							</tr>
+							<tr>
+								<td># Walk Steps</td>
+								<td id="step_walk">0</td>
+							</tr>
+							<tr>
+								<td># Jog Steps</td>
+								<td id="step_jog">0</td>
+							</tr>
+							<tr>
+								<td># Run Steps</td>
+								<td id="step_run">0</td>
+							</tr>
+							<tr>
+								<td># Sprint Steps</td>
+								<td id="step_sprint">0</td>
+							</tr>
+							<tr>
+								<td># Movement Level</td>
+								<td id="step_int"></td>
+							</tr>
+						</tbody>
+					</table>
+					<canvas id="step_graph"></canvas>
+					<select id="mapNames" onChange='v.changeMap(mapNames)'>
+						<option value='osm'>OpenStreetMap</option>
+						<option value='rdi'>Google Streets</option>
+						<option value='arm'>Google Streets Alt</option>
+						<option value='hyb'>Google Hybrid</option>
+						<option value='ter'>Google Terrain</option>
+						<option value='rdo'>Google Roads Only</option>
+						<option value='tro'>Google Terrain Only</option>
+						<option value='sat'>Google Satellite Only</option>
+					</select>
+					<div id="step_map"></div>
+				</div>
+			</div>
+		</section>
+
+		<section id="view_login" class="view">
+			<div class="jumbotron jumbotron-fluid" id="login_section">
+				<div class="container">
+					<h1 class="display-4">Healthify</h1>
+					<p class="lead">Stay Healthy. Or Else.</p>
+					<div class="alert alert-primary" role="alert" id="login_alert">
+						You must login before using this application
+					</div>
+					<form id="login_form" method="post">
+						<div class="form-group">
+							<label for="login_email">Email address</label>
+							<input type="email" class="form-control" name="email" id="login_email" aria-describedby="accHelp" placeholder="Enter email" />
+							<small id="accHelp" class="form-text text-muted">If you don't have an account, one will be created automatically.</small>
+						</div>
+						<div class="form-group">
+							<label for="login_password">Password</label>
+							<input type="password" class="form-control" name="password" id="login_password" placeholder="Password" />
+						</div>
+						<button type="submit" class="btn btn-dark">Login / Create Account</button>
+						<button type="submit" class="btn btn-dark">Login with Facebook</button>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<script type="text/javascript" src="steps.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+
+	</body>
+</html>
